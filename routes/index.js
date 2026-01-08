@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var authMiddleware = require('../middlewares/auth');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,19 +15,17 @@ router.get('/login', function(req, res, next) {
 /* POST login page. */
 router.post('/login', function(req, res, next) {
   if(req.body.name==="admin" && req.body.password==="admin"){
+    req.session.user = { name: req.body.name };
     res.redirect("/admin")
   }else{
-    res.render('login', {});
+    res.render('index', { title: 'Express' });
   }
 });
 
-
-
 /* GET admin page. */
-router.get('/admin', function(req, res, next) {
-  res.render('index', { title: 'Express', layout: 'layout-admin' });
+router.get('/admin', authMiddleware, function(req, res, next) {
+  res.render('admin', { title: 'Express', user: req.session.user, layout: 'layout-admin' });
 });
-
 
 
 module.exports = router;

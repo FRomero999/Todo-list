@@ -6,6 +6,8 @@ var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts');
 var expressSession = require('express-session');
 
+var authMiddleware = require('./middlewares/auth');
+
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -27,7 +29,6 @@ app.use((req, res, next) => {
   next()
 })
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,7 +40,6 @@ app.use(expressSession({
   saveUninitialized: true,
   cookie: { secure: false } // Si usas HTTPS, cambia a true
 }));
-
 
 app.use('/', indexRouter);
 
