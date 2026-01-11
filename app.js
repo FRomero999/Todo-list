@@ -12,26 +12,6 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-
-var Database = require('better-sqlite3');
-let db = new Database("db.sqlite");
-const sql = `
-  CREATE TABLE IF NOT EXISTS tareas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    titulo TEXT NOT NULL,
-    descripcion TEXT,
-    completada INTEGER DEFAULT 0,
-    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-  `;
-db.prepare(sql).run();
-
-const stmt = db.prepare('INSERT INTO tareas (titulo, descripcion) VALUES (?, ?)');
-stmt.run("titulo de la tarea", "descripcion de la tarea");
-
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
