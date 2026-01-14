@@ -22,6 +22,18 @@ class TareaDAO {
         return this.#database.prepare(sql).run(id_usuario, titulo, descripcion, completada);
     }
 
+    // Método para eliminar una tarea por su id
+    deleteTarea(id) {
+        const sql = `DELETE FROM tareas WHERE id = ?`;
+        return this.#database.prepare(sql).run(id);
+    }
+
+    // Método para marcar una tarea como completada (columna completada a 1)
+    finishTarea(id) {
+        const sql = `UPDATE tareas SET completada = 1 WHERE id = ?`;
+        return this.#database.prepare(sql).run(id);
+    }
+    
 }
 
 // Exporta la clase UsuarioDAO para que pueda ser utilizada en otros módulos

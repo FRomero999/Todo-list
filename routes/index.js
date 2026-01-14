@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var authMiddleware = require('../middlewares/auth');
 var Database = require('../data/database');
-var UsuarioDAO = require("../data/usuario-dao");
+const UsuarioDAO = require("../data/usuario-dao");
 const TareaDAO = require('../data/tarea-dao');
 
 // Inicio la base de datos y los daos necesarios
@@ -41,6 +41,8 @@ router.get('/login', function(req, res, next) {
  */
 router.post('/login', function(req, res, next) {
   const user = dao.findUserByEmail(req.body.name);
+
+  if(!user) res.render('index', { title: 'Express' });
 
   if(req.body.password===user.password){
     req.session.user = { email: user.email, id: user.id };
