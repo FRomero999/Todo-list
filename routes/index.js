@@ -82,4 +82,25 @@ router.get('/temp', function(req, res, next) {
   res.send("ok");
 });
 
+
+// Ruta POST /tareas/insertar
+// Esta ruta recibe los datos del formulario para insertar una nueva tarea
+
+router.post("/tareas/insertar", authMiddleware, function(req, res, next) {
+  // req.body contiene los datos enviados desde el formulario de nueva tarea
+
+  // Se crea un objeto "tarea" con la información proporcionada por el usuario autenticado
+  let tarea = {
+    id_usuario : req.session.user.id, // ID del usuario autenticado
+    titulo : req.body.titulo,         // Título de la tarea
+    descripcion : req.body.descripcion, // Descripción de la tarea
+  }
+
+  // Se guarda la tarea en la base de datos usando el DAO
+  datoTareas.saveTarea(tarea.id_usuario, tarea.titulo, tarea.descripcion);
+
+  // Luego de guardar, se redirige al panel de administración
+  res.redirect("/admin");
+});
+
 module.exports = router;

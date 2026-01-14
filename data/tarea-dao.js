@@ -17,7 +17,8 @@ class TareaDAO {
 
     // Método para guardar una nueva tarea
     // Recibe como parámetros la info de la nueva tarea: id_usuario, titulo, descripcion, completada
-    saveTarea(id_usuario, titulo, descripcion, completada = 0) {
+    saveTarea(id_usuario, titulo, descripcion, completada = 0, fecha_creacion) {
+        fecha_creacion = new Date()
         const sql = `INSERT INTO tareas (id_usuario, titulo, descripcion, completada) VALUES (?, ?, ?, ?)`;
         return this.#database.prepare(sql).run(id_usuario, titulo, descripcion, completada);
     }
