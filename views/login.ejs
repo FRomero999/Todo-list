@@ -1,12 +1,14 @@
-<form method="post">
-    <h2>Login</h2>
-    <div>
-        <label for="idName">Name :</label>
-        <input type="text" id="idName" name="name">
+<form method="post" style="max-width:25rem;" class="mx-auto mt-5 pt-3 d-flex flex-column align-items-center gap-3 border rounded-3 shadow">
+    <h3 class="mb-3 fw-normal">Login</h3>
+    <div class="form-floating">
+        <input type="text" class="form-control" id="idName" placeholder="name@example.com" name="name">
+        <label for="idName">Email address</label>
     </div>
-    <div>
-        <label for="idPassword">Password: </label>
-        <input type="password" id="idPassword" name="password">
+    <div class="form-floating">
+        <input type="password" class="form-control" id="idPassword" placeholder="Password" name="password">
+        <label for="idPassword">Password</label>
     </div>
-    <button>Login</button>
+
+    <button class="btn btn-primary py-2" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-body-secondary">© 2017–2025</p>
 </form>
